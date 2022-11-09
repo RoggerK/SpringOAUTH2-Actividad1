@@ -27,7 +27,7 @@ public class AlumnoRestController {
 	@GetMapping("/listar/{id}")
 	public ResponseEntity<Alumno> listar(@PathVariable Integer id) {
 		Alumno alumno = service.porId(id);
-		if(id == null) {
+		if(alumno == null) {
 			return new ResponseEntity<Alumno>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<Alumno>(alumno, HttpStatus.OK);
