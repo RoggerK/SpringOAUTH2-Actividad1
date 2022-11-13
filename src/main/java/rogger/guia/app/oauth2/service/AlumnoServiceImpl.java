@@ -12,15 +12,32 @@ import rogger.guia.app.oauth2.repository.AlumnoRepository;
 public class AlumnoServiceImpl implements AlumnoService {
 	@Autowired
 	private AlumnoRepository repository;
-	
+
 	@Override
 	public List<Alumno> listar() {
-		return (List<Alumno>) repository.findAll();
+		return repository.findAll();
 	}
 
 	@Override
 	public Alumno porId(Integer id) {
 		return repository.findById(id).orElse(null);
 	}
-	
+
+	@Override
+	public void guardar(Alumno alumno) {
+		alumno.setId_alumno(0);
+		repository.save(alumno);
+	}
+
+	@Override
+	public void actualizar(Integer id, Alumno alumno) {
+		alumno.setId_alumno(id);
+		repository.saveAndFlush(alumno);
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		repository.deleteById(id);
+	}
+
 }
